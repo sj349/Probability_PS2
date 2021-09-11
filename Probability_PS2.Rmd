@@ -1,7 +1,351 @@
 ---
 title: "Steph Jordan Custom PS2"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
+## Question 1
+
+A. Writing the conditional statement illustrating the probability that a person speaks Spanish given that they are from South America.
+
+
+$$ P(\text{speaks Spanish} | \text{from South America}) $$
+
+
+B. Writing the conditional statement illustrating the probability that a person is from South America given that they speak Spanish.
+
+$$ P(\text{from South America} | \text{ speaks Spanish}) $$
+C. The probability of A will likely be higher, since Spanish is commonly spoken in many places (including but not exclusively South America). Therefore, it's less likely that a person is from South America just because they speak Spanish. 
+
+D. Probability that someone speaks Spanish given that they are from South America in full notation:  
+
+$$ P(\text{speaks Spanish} | \text{from South America}) = \frac{P (\text{speaks Spanish} \cap \text{from South America})}{P(\text{from South America})} $$
+
+## Question 2
+
+Using DiagrammeR to draw a branching tree.
+
+```{r}
+library(DiagrammeR)
+library(tidyverse)
+
+# Create our visualization
+tree <-
+    create_graph() %>% # initiate graph
+    add_n_nodes(
+      n = 7, 
+      type = "path",
+      label = c("START", "B", "G", "B", "G", "B", "G"), # Labels for each node
+      node_aes = node_aes(
+        shape = "circle",
+        height = 1,
+        width = 1,
+        x = c(0, 3, 3, 6, 6, 6, 6), # Just the heights of each node (so it looks like a tree)
+        y = c(0, 2, -2, 3, 1, -3, -1), 
+        fill = c("white", "blue", "green", "blue", "blue", "blue", "blue"))) %>% 
+    add_edge(
+      from = 1,
+      to = 2,
+      edge_aes = edge_aes(
+        label = "0.5"
+      )) %>% 
+  add_edge(
+      from = 1,
+      to = 3,
+      edge_aes = edge_aes(
+        label = "0.5", 
+        color = "red"
+      )) %>% 
+  add_edge(
+      from = 2,
+      to = 4,
+      edge_aes = edge_aes(
+        label = "0.5"
+      )) %>% 
+  add_edge(
+      from = 2,
+      to = 5,
+      edge_aes = edge_aes(
+        label = "0.5"
+      )) %>% 
+  add_edge(
+      from = 3,
+      to = 6,
+      edge_aes = edge_aes(
+        label = "0.5",
+        color='red'
+      )) %>% 
+  add_edge(
+      from = 3,
+      to = 7,
+      edge_aes = edge_aes(
+        label = "0.5"
+      )) 
+render_graph(tree)
+```
+A. Finding probability of both girls given that at least one is a girl: $$ P(\text{both girls} | \text{at least one girl}) $$
+```{r}
+# Create our visualization
+tree <-
+    create_graph() %>% # initiate graph
+    add_n_nodes(
+      n = 7, 
+      type = "path",
+      label = c("START", "B", "G", "B", "G", "B", "G"), # Labels for each node
+      node_aes = node_aes(
+        shape = "circle",
+        height = 1,
+        width = 1,
+        x = c(0, 3, 3, 6, 6, 6, 6), # Just the heights of each node (so it looks like a tree)
+        y = c(0, 2, -2, 3, 1, -3, -1), 
+        fill = c("white", "blue", "green", "blue", "blue", "blue", "green"))) %>% 
+    add_edge(
+      from = 1,
+      to = 2,
+      edge_aes = edge_aes(
+        label = "0.5",
+        color='red'
+      )) %>% 
+  add_edge(
+      from = 1,
+      to = 3,
+      edge_aes = edge_aes(
+        label = "0.5", 
+        color = "red"
+      )) %>% 
+  add_edge(
+      from = 2,
+      to = 4,
+      edge_aes = edge_aes(
+        label = "0.5"
+      )) %>% 
+  add_edge(
+      from = 2,
+      to = 5,
+      edge_aes = edge_aes(
+        label = "0.5",
+        color='red'
+      )) %>% 
+  add_edge(
+      from = 3,
+      to = 6,
+      edge_aes = edge_aes(
+        label = "0.5",
+        color='red'
+      )) %>% 
+  add_edge(
+      from = 3,
+      to = 7,
+      edge_aes = edge_aes(
+        label = "0.5",
+        color='red'
+      )) 
+render_graph(tree)
+```
+
+Yes, our graph does match the answer in the book. We see that three out of four total branches have at least one girl (see branches colored red); this tells us the denominator of our equation: $$P(\text{at least one girl})=(1/2)^2 +(1/2)^2+(1/2)^2=3/4$$
+The green nodes illustrate the path that leads to our numerator: $$P (\text{both girls} \cap \text{at least one girl})=(1/2)^2=1/4$$
+Therefore, when we divide the numerator by the denominator, we are left with $$ (1/4)/(3/4)=1/3$$
+
+B. Finding probability of both girls given that elder is a girl: $$ P(\text{both girls} | \text{elder is a girl}) $$
+
+```{r}
+# Create our visualization
+tree <-
+    create_graph() %>% # initiate graph
+    add_n_nodes(
+      n = 7, 
+      type = "path",
+      label = c("START", "B", "G", "B", "G", "B", "G"), # Labels for each node
+      node_aes = node_aes(
+        shape = "circle",
+        height = 1,
+        width = 1,
+        x = c(0, 3, 3, 6, 6, 6, 6), # Just the heights of each node (so it looks like a tree)
+        y = c(0, 2, -2, 3, 1, -3, -1), 
+        fill = c("white", "blue", "green", "blue", "blue", "blue", "green"))) %>% 
+    add_edge(
+      from = 1,
+      to = 2,
+      edge_aes = edge_aes(
+        label = "0.5"
+      )) %>% 
+  add_edge(
+      from = 1,
+      to = 3,
+      edge_aes = edge_aes(
+        label = "0.5", 
+        color = "red"
+      )) %>% 
+  add_edge(
+      from = 2,
+      to = 4,
+      edge_aes = edge_aes(
+        label = "0.5"
+      )) %>% 
+  add_edge(
+      from = 2,
+      to = 5,
+      edge_aes = edge_aes(
+        label = "0.5"
+      )) %>% 
+  add_edge(
+      from = 3,
+      to = 6,
+      edge_aes = edge_aes(
+        label = "0.5",
+        color='red'
+      )) %>% 
+  add_edge(
+      from = 3,
+      to = 7,
+      edge_aes = edge_aes(
+        label = "0.5",
+        color='red'
+      )) 
+render_graph(tree)
+```
+Similarly, here we find the denominator by looking at all the illuminated branches: $$ P(\text {elder is a girl})=(1/2)^2+(1/2)^2=1/4+1/4=1/2$$
+We then find the numerator by looking at the branches with green nodes: $$P(\text{both girls}\cap \text {elder is a girl})=(1/2)^2=1/4 $$
+Dividing numerator by denominator, we have:
+$$ (1/4)/(1/2)=1/2$$
+
+## Question 3
+This equation translates Bayes rule into its "odds" form. We will break down the equation by showing how each component represents a translation from its probability form to its  "odds" form.
+The first part of the equation:
+$$ \frac {P(\text{A} | \text{B})}{P(\text{A}^c | \text{B})} $$
+represents the "odds" form of $$P(\text{A} | \text{B})$$. This can be seen because we take the numerator (the conditional probability of A given B) and divide by its complement. By dividing by the probability of an event by the probability of its complement, we transform a probability into its "odds" form, per definition 2.3.4 on page 49 of B&H. This part of the equation can also be called the "posterior odds" (that is, the odds of an event occurring after relevant background information is taken into account). The second part of the equation underwent the same transformation: we took the P(A) component of Bayes' rule and divided it by its complement, to transform it from "probability of A" to "odds of A". This can be called the "prior odds" (the odds that the event occurs without relevant background information taken into account). The third part of the equation: $$ \frac {P(\text{B} | \text{A})}{P(\text{B} | \text{A}^c)} $$
+again represents a division of the P(B|A) component of Bayes' rule by its complement, which again transforms the probability into its odds form. This part is also known as the "likelihood ratio," or the factor by which you multiply the prior odds (in our breakdown, "part 2") to get the posterior odds ("part 1"). 
+
+
+## Question 4
+
+Calculating probability of fair coin given three heads in a row (per book example):
+
+```{r}
+fair_coin <- 1/2
+biased_coin <- 3/4
+heads <- 3
+
+fair_coin^heads * 1/2 / (fair_coin^heads * 1/2 + biased_coin^heads * 1/2)
+```
+
+A. How many heads in a row do we need for our probability of a fair coin to drop below 10%? Use a while loop to increment the number of heads until probability dips below 10%
+
+```{r}
+p=1
+heads=3
+while(p>0.1){
+heads=heads+1
+p=fair_coin^heads * 1/2 / (fair_coin^heads * 1/2 + biased_coin^heads * 1/2)
+}
+print (heads)
+```
+B. Same logic, but stop when P<0.05.
+```{r}
+p=1
+heads=3
+while(p>0.05){
+heads=heads+1
+p=fair_coin^heads * 1/2 / (fair_coin^heads * 1/2 + biased_coin^heads * 1/2)
+}
+print (heads)
+```
+
+C. We can find the probability of several tail flips by using the same equation but with the "tail probability" in place of the "head probability" for the biased coin.
+
+```{r}
+biased_coin_tails_prob <- 1/4
+tails <- 3
+fair_coin^tails * 1/2 / (fair_coin^tails * 1/2 + biased_coin_tails_prob^tails * 1/2)
+
+```
+
+
+## Question 5
+
+A. The specificity of a test is the true negative rate, that is, the probability that a person tests negative given that they in fact do NOT have the disease. This demonstrates how accurately the test performs on people *without* the disease.
+
+B. The sensitivity of a test is the true positive rate, that is, the probability that a person tests positive given that they in fact DO have the disease. This demonstrates how accurately the test performs on people *with* the disease.
+
+C. Changing the value for specificity accordingly, we can apply the same logic as in the book:
+
+```{r}
+sensitivity <- 0.9
+sensitivity_complement <- 1-sensitivity
+disease_rate <- 0.01
+disease_rate_complement <- 1-disease_rate
+
+sensitivity*disease_rate/((sensitivity*disease_rate)+(sensitivity_complement*disease_rate_complement))
+```
+
+D. Changing the value for the disease rate accordingly, we can again apply the same logic:
+```{r}
+sensitivity <- 0.95
+sensitivity_complement <- 1-sensitivity
+disease_rate <- 0.05
+disease_rate_complement <- 1-disease_rate
+
+sensitivity*disease_rate/((sensitivity*disease_rate)+(sensitivity_complement*disease_rate_complement))
+```
+
+E. Filling out disease tree for conditionitis B, which has a disease rate of 5% and a sensitivity of 95%.
+```{r}
+tree <-
+    create_graph() %>% # initiate graph
+    add_n_nodes(
+      n = 7, 
+      type = "path",
+      label = c("10000 People", "9500 People", "500 People", "475", "9025", "475", "25"), # Labels for each node
+      node_aes = node_aes(
+        shape = "circle",
+        height = 1,
+        width = 1,
+        x = c(0, 3, 3, 6, 6, 6, 6), # Just the heights of each node (so it looks like a tree)
+        y = c(0, 2, -2, 3, 1, -3, -1))) %>% 
+    add_edge(
+      from = 1,
+      to = 2,
+      edge_aes = edge_aes(
+        label = "healthy"
+      )) %>% 
+  add_edge(
+      from = 1,
+      to = 3,
+      edge_aes = edge_aes(
+        label = "diseased"
+      )) %>% 
+  add_edge(
+      from = 2,
+      to = 4,
+      edge_aes = edge_aes(
+        label = "test +"
+      )) %>% 
+  add_edge(
+      from = 2,
+      to = 5,
+      edge_aes = edge_aes(
+        label = "test -"
+      )) %>% 
+  add_edge(
+      from = 3,
+      to = 6,
+      edge_aes = edge_aes(
+        label = "test +"
+      )) %>% 
+  add_edge(
+      from = 3,
+      to = 7,
+      edge_aes = edge_aes(
+        label = "test -"
+      )) 
+render_graph(tree)
+```
+
+
+## Question 6
+
+Another example of the prosecutor's fallacy would be to confuse P(T|D) and P(D|T) in the prior problems. The probability of getting a positive test result given that you have the disease is very different from the probability of having the disease given that you got a positive test result. This is because the prior probability of having the disease (P(D)) is so low (0.01 or 0.05 in our examples). Therefore, in one case (say, P(D|T)), we have this low prior probability in the numerator, while in the other case (P(T|D)) we have this low probability in the denominator--the fact that we multiply by the prior probability of disease in one calculation and divide by it in the other illustrates that the conditional probabilities will be drastically different. 
 
 
