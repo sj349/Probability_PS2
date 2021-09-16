@@ -212,11 +212,14 @@ Dividing numerator by denominator, we have:
 $$ (1/4)/(1/2)=1/2$$
 
 ## Question 3
-This equation translates Bayes rule into its "odds" form. We will break down the equation by showing how each component represents a translation from its probability form to its  "odds" form.
+This equation translates conditional probabilities into their "odds" forms. We will break down the equation by showing how each component represents a piece of the formula posterior odds= prior odds * Likelihood Ratio
 The first part of the equation:
 $$ \frac {P(\text{A} | \text{B})}{P(\text{A}^c | \text{B})} $$
-represents the "odds" form of $$P(\text{A} | \text{B})$$. This can be seen because we take the numerator (the conditional probability of A given B) and divide by its complement. By dividing by the probability of an event by the probability of its complement, we transform a probability into its "odds" form, per definition 2.3.4 on page 49 of B&H. This part of the equation can also be called the "posterior odds" (that is, the odds of an event occurring after relevant background information is taken into account). The second part of the equation underwent the same transformation: we took the P(A) component of Bayes' rule and divided it by its complement, to transform it from "probability of A" to "odds of A". This can be called the "prior odds" (the odds that the event occurs without relevant background information taken into account). The third part of the equation: $$ \frac {P(\text{B} | \text{A})}{P(\text{B} | \text{A}^c)} $$
-again represents a division of the P(B|A) component of Bayes' rule by its complement, which again transforms the probability into its odds form. This part is also known as the "likelihood ratio," or the factor by which you multiply the prior odds (in our breakdown, "part 2") to get the posterior odds ("part 1"). 
+represents the "odds" form of $$P(\text{A} | \text{B})$$ aka the "posterior odds" or the odds after some evidence has been taken into account. This can be seen because we take the numerator (the conditional probability of A given B) and divide by its complement. By dividing by the probability of an event by the probability of its complement, we transform a probability into its "odds" form, per definition 2.3.4 on page 49 of B&H. 
+
+The second part of the equation underwent the same transformation: we took the prior odds (P(A)) and divided it by its complement, to transform it from "probability of A" to "odds of A". This can be called the "prior odds" (the odds that the event occurs without relevant background information taken into account). The likelihood ratio is the true positive rate over the false positive rate. This is represented by the third part of the equation: $$ \frac {P(\text{B} | \text{A})}{P(\text{B} | \text{A}^c)} $$
+
+We find this by dividing P(B|A) (the "true" positive rate) by its complement (P(B|A^C), the "false" positive rate). This part is also known as the "likelihood ratio," or the factor by which you multiply the prior odds (in our breakdown, "part 2") to get the posterior odds ("part 1"). 
 
 
 ## Question 4
@@ -346,6 +349,6 @@ render_graph(tree)
 
 ## Question 6
 
-Another example of the prosecutor's fallacy would be to confuse P(T|D) and P(D|T). The probability of getting a positive test result given that you have the disease is very different from the probability of having the disease given that you got a positive test result. This is because the pool of people who have the disease is so small (the prior probability, or the probability of having the disease (P(D)) is 0.01 or 0.05 in our examples). Therefore, it's actually more likely to get a false positive than a true positive test result. So, the occurence of a true test result does *not* imply that you have the disease. Conversely, the likelihood that you get a true test result given that you have the disease is higher, since in this case, the very low probability (P(D)) is in the denominator. To reiterate the answer in a mathematical framing, in one case (that is, P(T|D)) we have this low probability in the denominator, while in the other case we do not--the fact that we divide by this very low prior probability in one calculation and divide by a less low probability (P(T)) in the other illustrates that the conditional probabilities will be drastically different. 
+Another example of the prosecutor's fallacy would be to confuse P(T|D) and P(D|T). The probability of getting a positive test result given that you have the disease is much higher than the probability of having the disease given that you got a positive test result. This is because the pool of people who have the disease is so small (the prior probability of P(D) is 0.01 or 0.05 in our examples). Therefore, in calculating the odds of D|T, we multiply by a very low prior odds, and therefore get a very low posterior odds. However, in calculating the odds of T|D, we multiply by a different prior odds (P(T)), which is not as low as P(D). Therefore, the ultimate outcomes will be different (P(D|T) will be much lower than P(T|D)). 
 
 
