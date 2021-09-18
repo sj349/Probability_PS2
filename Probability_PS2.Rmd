@@ -242,11 +242,7 @@ heads=3
 while(p>0.1){
   heads=heads+1
   p=fair_coin^heads * 1/2 / (fair_coin^heads * 1/2 + biased_coin^heads * 1/2)
-  if (p<=0.1){
-    #decrement by 1 to account for overcounting the last flip
-    heads=heads-1
-    break
-  }
+ 
 }
 print (heads)
 ```
@@ -257,11 +253,7 @@ heads=3
 while(p>0.05){
 heads=heads+1
 p=fair_coin^heads * 1/2 / (fair_coin^heads * 1/2 + biased_coin^heads * 1/2)
-if (p<=0.05){
-    #decrement by 1 to account for overcounting the last flip
-    heads=heads-1
-    break
-  }
+
 }
 print (heads)
 ```
